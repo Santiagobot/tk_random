@@ -1,0 +1,29 @@
+import tkinter as tk
+import random
+import string
+
+class Application(tk.Frame):
+    def __init__(self, master=None):
+        super().__init__(master)
+        self.master = master
+        self.pack()
+        self.create_widgets()
+
+    def create_widgets(self):
+        self.rand = tk.Button(self)
+        self.rand["text"] = "Generate a random sequence"
+        self.rand["command"] = self.random_string
+        self.rand.pack(side="top")
+
+        self.quit = tk.Button(self, text="Exit", fg="blue",
+                              command=self.master.destroy)
+        self.quit.pack(side="bottom")
+
+    def random_string(self):
+        letters = string.ascii_lowercase
+        result_str = ''.join(random.choice(letters) for i in range(10))
+        print("Random string of length", 10, "is:", result_str)
+
+root = tk.Tk()
+app = Application(master=root)
+app.mainloop()
